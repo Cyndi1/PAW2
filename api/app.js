@@ -4,11 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var bukusRouter = require('./routes/bukus');
+var indexRouter = require('./app_server/routes/index');
+var usersRouter = require('./app_server/routes/users');
+var bukusRouter = require('./app_server/routes/bukus');
 
-const mongoose = require('mongoose');
+require('./app_server/model/db');
 
 // CORS Enabled
 // Cross Origin Resouece Sharing
@@ -21,15 +21,7 @@ app.use((req, res, next) => {
     'Origin, X-Requested-With, Content-Type, Accept');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
   next();
-});
-
-mongoose.connect(
-  "mongodb://localhost:27017/dbbuku"
-).then(() => {
-  console.log("Connected to database");
-}).catch((err) => {
-  console.log("Connection failed");
-});
+ });
   
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
