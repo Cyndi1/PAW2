@@ -10,7 +10,7 @@ export class BukuService {
 
   
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   addBuku(judul : string, penulis : string, genres : string[]){
     const buku : Buku= {
@@ -22,10 +22,10 @@ export class BukuService {
 
     console.log(buku);
 
-    // this.http.post<{message : string}>(this.url,buku)
-    // .subscribe((response)=>{
-    //   console.log(response.message)
-    // });
+    this.http.post<{message : string}>(this.url,buku)
+    .subscribe((response)=>{
+      console.log(response.message)
+    });
 
   }
 }
